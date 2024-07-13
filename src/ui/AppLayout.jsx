@@ -17,7 +17,7 @@ function AppLayout() {
       <Header />
       <Sidebar />
       <Main>
-        <Outlet />;
+        <Outlet />
       </Main>
     </StyledAppLayout>
   );
