@@ -1,4 +1,13 @@
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import {
+  HiOutlineCalendarDays,
+  HiOutlineCog6Tooth,
+  HiOutlineHome,
+  HiOutlineHomeModern,
+  HiOutlineUsers,
+} from "react-icons/hi2";
+import PropTypes from "prop-types";
 
 const NavList = styled.ul`
   display: flex;
@@ -6,7 +15,7 @@ const NavList = styled.ul`
   gap: 0.8rem;
 `;
 
-const Link = styled.a`
+const StyledNavLink = styled(NavLink)`
   &:link,
   &:visited {
     display: flex;
@@ -44,3 +53,46 @@ const Link = styled.a`
     color: var(--color-brand-600);
   }
 `;
+
+// MainNav.propTypes = {};
+function MainNav() {
+  return (
+    <nav>
+      <NavList>
+        <MainNavItem to="/dashboard" label="Home">
+          <HiOutlineHome />
+        </MainNavItem>
+        <MainNavItem to="/bookings" label="Bookings">
+          <HiOutlineCalendarDays />
+        </MainNavItem>
+        <MainNavItem to="/cabins" label="Cabins">
+          <HiOutlineHomeModern />
+        </MainNavItem>
+        <MainNavItem to="/users" label="Users">
+          <HiOutlineUsers />
+        </MainNavItem>
+        <MainNavItem to="/settings" label="Settings">
+          <HiOutlineCog6Tooth />
+        </MainNavItem>
+      </NavList>
+    </nav>
+  );
+}
+
+MainNavItem.propTypes = {
+  to: PropTypes.string,
+  label: PropTypes.string,
+  children: PropTypes.any,
+};
+function MainNavItem({ to, label, children }) {
+  return (
+    <li>
+      <StyledNavLink to={to}>
+        {children}
+        <span>{label}</span>
+      </StyledNavLink>
+    </li>
+  );
+}
+
+export default MainNav;
