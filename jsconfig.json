@@ -4,15 +4,14 @@
     "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@data/": ["./src/data/*"],
-      "@features/": ["./src/features/*"],
-      "@hooks/": ["./src/hooks/*"],
-      "@pages/": ["./src/pages/*"],
-      "@services/": ["./src/services/*"],
-      "@styles/": ["./src/styles/*"],
-      "@ui/": ["./src/ui/*"],
-      "@utils/": ["./src/utils/*"]
+      "@/data/*": ["./src/data/*"],
+      "@/features/*": ["./src/features/*"],
+      "@/hooks/*": ["./src/hooks/*"],
+      "@/pages/*": ["./src/pages/*"],
+      "@/services/*": ["./src/services/*"],
+      "@/styles/*": ["./src/styles/*"],
+      "@/ui/*": ["./src/ui/*"],
+      "@/utils/*": ["./src/utils/*"]
     }
   },
   "include": ["src"],
