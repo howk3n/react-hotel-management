@@ -4,9 +4,9 @@ import BookingDataBox from "./BookingDataBox";
 import Row from "../../ui/Row";
 import Heading from "../../ui/Heading";
 import Tag from "../../ui/Tag";
-import ButtonGroup from "../../ui/ButtonGroup";
-import Button from "../../ui/Button";
-import ButtonText from "../../ui/ButtonText";
+import ButtonGroup from "../../ui/button/ButtonGroup";
+import Button from "../../ui/button/Button";
+import ButtonText from "../../ui/button/ButtonText";
 
 import { useMoveBack } from "../../hooks/useMoveBack";
 

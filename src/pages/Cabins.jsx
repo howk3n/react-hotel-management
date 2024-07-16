@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Button from "@/ui/Button";
+import Button from "@/ui/button/Button";
 import Heading from "../ui/Heading";
 import Row from "../ui/Row";
 import CabinTable from "@/features/cabins/CabinTable";
