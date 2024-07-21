@@ -1,7 +1,6 @@
 import Row from "@/ui/Row";
-
 import Heading from "@/ui/Heading";
-import UpdateSettingsForm from "@/features/settings/UpdateSettingsForm";
+import UpdateSettingsForm from "@/features/settings/components/UpdateSettingsForm";
 
 function Settings() {
   return (

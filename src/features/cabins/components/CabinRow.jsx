@@ -3,7 +3,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
 import Utils from "@/utils/index";
-import CreateCabinForm from "../CreateCabinForm";
+import CreateCabinForm from "./CreateCabinForm";
 import { useDeleteCabin } from "../api/useDeleteCabin";
 import { useCreateCabin } from "../api/useCreateCabin";
 
