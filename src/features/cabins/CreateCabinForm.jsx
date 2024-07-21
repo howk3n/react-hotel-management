@@ -31,7 +31,7 @@ function CreateCabinForm() {
   );
 
   function onSubmit(data) {
-    handleCreateCabin(data);
+    handleCreateCabin({ ...data, image: data.image[0] });
   }
 
   function onError(errors) {
@@ -122,7 +122,14 @@ function CreateCabinForm() {
       </FormRow>
 
       <FormRow label="Cabin photo">
-        <FileInput id="image" accept="image/*" disabled={isCreatingCabin} />
+        <FileInput
+          id="image"
+          accept="image/*"
+          disabled={isCreatingCabin}
+          {...register("image", {
+            required: REQUIRED_FIELD_MESSAGE,
+          })}
+        />
       </FormRow>
 
       <FormRow>
