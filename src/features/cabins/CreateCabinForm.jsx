@@ -1,14 +1,13 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
-import toast from "react-hot-toast";
-import Input from "../../ui/Input";
-import Form from "../../ui/Form";
-import Button from "../../ui/button/Button";
-import FileInput from "../../ui/FileInput";
-import Textarea from "../../ui/Textarea";
-import { createEditCabin } from "@/services/apiCabins";
+import Input from "@/ui/Input";
+import Form from "@/ui/Form";
+import Button from "@/ui/button/Button";
+import FileInput from "@/ui/FileInput";
+import Textarea from "@/ui/Textarea";
 import FormRow from "@/ui/FormRow";
+import { useCreateCabin } from "./useCreateCabin";
+import { useEditCabin } from "./useEditCabin";
 
 const REQUIRED_FIELD_MESSAGE = "This field is required.";
 
@@ -16,6 +15,10 @@ CreateCabinForm.propTypes = {
   cabinToEdit: PropTypes.object,
 };
 function CreateCabinForm({ cabinToEdit = {} }) {
+  const { isCreatingCabin, handleCreateCabin } = useCreateCabin();
+  const { isEditingCabin, handleEditCabin } = useEditCabin();
+  const isWorking = isCreatingCabin || isEditingCabin;
+
   const { id: editId, ...editValues } = cabinToEdit;
   const isEditSession = Boolean(editId);
 
@@ -24,39 +27,22 @@ function CreateCabinForm({ cabinToEdit = {} }) {
   });
   const { errors } = formState;
 
-  const queryClient = useQueryClient();
-  const { mutate: handleCreateCabin, isLoading: isCreatingCabin } = useMutation(
-    {
-      mutationFn: createEditCabin,
-      onSuccess: () => {
-        toast.success("New cabin successfully created!");
-        queryClient.invalidateQueries({ queryKey: ["cabins"] });
-        reset();
-      },
-      onError: (err) => {
-        toast.error(err.message);
-      },
-    }
-  );
-  const { mutate: handleEditCabin, isLoading: isEditingCabin } = useMutation({
-    mutationFn: ({ newCabinData, id }) => createEditCabin(newCabinData, id),
-    onSuccess: () => {
-      toast.success("Cabin successfully edited!");
-      queryClient.invalidateQueries({ queryKey: ["cabins"] });
-      reset();
-    },
-    onError: (err) => {
-      toast.error(err.message);
-    },
-  });
-
-  const isWorking = isCreatingCabin || isEditingCabin;
-
   function onSubmit(data) {
     const image = typeof data.image === "string" ? data.image : data.image[0];
     if (isEditSession)
-      handleEditCabin({ newCabinData: { ...data, image }, id: editId });
-    else handleCreateCabin({ ...data, image });
+      handleEditCabin(
+        { newCabinData: { ...data, image }, id: editId },
+        {
+          onSuccess: (data) => reset(),
+        }
+      );
+    else
+      handleCreateCabin(
+        { ...data, image },
+        {
+          onSuccess: (data) => reset(),
+        }
+      );
   }
 
   function onError(errors) {

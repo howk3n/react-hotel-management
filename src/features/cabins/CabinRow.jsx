@@ -1,11 +1,9 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import toast from "react-hot-toast";
 import { useState } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Utils from "@/utils/index";
-import { deleteCabin } from "@/services/apiCabins";
 import CreateCabinForm from "./CreateCabinForm";
+import { useDeleteCabin } from "./useDeleteCabin";
 
 const TableRow = styled.div`
   display: grid;
@@ -51,6 +49,8 @@ CabinRow.propTypes = {
 };
 function CabinRow({ cabin }) {
   const [showForm, setShowForm] = useState(false);
+  const { isDeleting, handleDeleteCabin } = useDeleteCabin();
+
   const {
     id: cabinId,
     name,
@@ -60,21 +60,6 @@ function CabinRow({ cabin }) {
     image,
   } = cabin;
 
-  const queryClient = useQueryClient();
-
-  const { isLoading: isDeleting, mutate: handleDelete } = useMutation({
-    mutationFn: deleteCabin,
-    onSuccess: () => {
-      toast.success("Cabin successfully deleted!");
-      queryClient.invalidateQueries({
-        queryKey: ["cabins"],
-      });
-    },
-    onError: (err) => {
-      toast.error(err.message);
-    },
-  });
-
   return (
     <>
       <TableRow role="row">
@@ -82,7 +67,11 @@ function CabinRow({ cabin }) {
         <Cabin>{name}</Cabin>
         <div>Fits up to {maxCapacity} guests</div>
         <Price>{Utils.number.formatCurrency(regularPrice)}</Price>
-        <Discount>{Utils.number.formatCurrency(discount)}</Discount>
+        {discount ? (
+          <Discount>{Utils.number.formatCurrency(discount)}</Discount>
+        ) : (
+          <span>&mdash;</span>
+        )}
         <div>
           {!showForm && (
             <button
@@ -92,7 +81,10 @@ function CabinRow({ cabin }) {
               Edit
             </button>
           )}
-          <button onClick={() => handleDelete(cabinId)} disabled={isDeleting}>
+          <button
+            onClick={() => handleDeleteCabin(cabinId)}
+            disabled={isDeleting}
+          >
             Delete
           </button>
         </div>
