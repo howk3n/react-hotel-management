@@ -1,9 +1,11 @@
+import { useState } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
 import Utils from "@/utils/index";
 import CreateCabinForm from "./CreateCabinForm";
 import { useDeleteCabin } from "./useDeleteCabin";
+import { useCreateCabin } from "./useCreateCabin";
 
 const TableRow = styled.div`
   display: grid;
@@ -48,8 +50,11 @@ CabinRow.propTypes = {
   cabin: PropTypes.object,
 };
 function CabinRow({ cabin }) {
+  const { isDeletingCabin, handleDeleteCabin } = useDeleteCabin();
+  const { isCreatingCabin, handleCreateCabin } = useCreateCabin();
+  const isWorking = isDeletingCabin || isCreatingCabin;
+
   const [showForm, setShowForm] = useState(false);
-  const { isDeleting, handleDeleteCabin } = useDeleteCabin();
 
   const {
     id: cabinId,
@@ -58,8 +63,19 @@ function CabinRow({ cabin }) {
     regularPrice,
     discount,
     image,
+    description,
   } = cabin;
 
+  function handleDuplicateCabin() {
+    handleCreateCabin({
+      name: `Copy of ${name}`,
+      maxCapacity,
+      regularPrice,
+      discount,
+      image,
+      description,
+    });
+  }
   return (
     <>
       <TableRow role="row">
@@ -73,19 +89,22 @@ function CabinRow({ cabin }) {
           <span>&mdash;</span>
         )}
         <div>
+          <button onClick={handleDuplicateCabin} disabled={isWorking}>
+            <HiSquare2Stack />
+          </button>
           {!showForm && (
             <button
               onClick={() => setShowForm((show) => !show)}
-              disabled={isDeleting}
+              disabled={isWorking}
             >
-              Edit
+              <HiPencil />
             </button>
           )}
           <button
             onClick={() => handleDeleteCabin(cabinId)}
-            disabled={isDeleting}
+            disabled={isWorking}
           >
-            Delete
+            <HiTrash />
           </button>
         </div>
       </TableRow>

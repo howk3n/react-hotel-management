@@ -21,11 +21,12 @@ function getCabinImageData(cabin) {
     ? cabin.image
     : `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;
 
-  return { imageName, imagePath };
+  return { imageName, imagePath, shouldUploadImage: !hasImagePath };
 }
 
 export async function createEditCabin(newCabin, id) {
-  const { imageName, imagePath } = getCabinImageData(newCabin);
+  const { imageName, imagePath, shouldUploadImage } =
+    getCabinImageData(newCabin);
   // 1. Create/edit cabin
   let query = supabase.from("cabins");
   // A. Create
@@ -43,6 +44,7 @@ export async function createEditCabin(newCabin, id) {
   }
 
   // 2. Upload image
+  if (!shouldUploadImage) return data;
   const { error: uploadError } = await supabase.storage
     .from("cabin-images")
     .upload(imageName, newCabin.image, {
