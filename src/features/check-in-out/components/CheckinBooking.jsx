@@ -1,13 +1,13 @@
 import styled from "styled-components";
-import BookingDataBox from "../../features/bookings/BookingDataBox";
+import BookingDataBox from "../../bookings/BookingDataBox";
 
-import Row from "../../ui/Row";
-import Heading from "../../ui/Heading";
-import ButtonGroup from "../../ui/button/ButtonGroup";
-import Button from "../../ui/button/Button";
-import ButtonText from "../../ui/button/ButtonText";
+import Row from "../../../ui/Row";
+import Heading from "../../../ui/Heading";
+import ButtonGroup from "../../../ui/button/ButtonGroup";
+import Button from "../../../ui/button/Button";
+import ButtonText from "../../../ui/button/ButtonText";
 
-import { useMoveBack } from "../../hooks/useMoveBack";
+import { useMoveBack } from "../../../hooks/useMoveBack";
 
 const Box = styled.div`
   /* Box */

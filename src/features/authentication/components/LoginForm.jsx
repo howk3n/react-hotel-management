@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Button from "../../ui/button/Button";
-import Form from "../../ui/Form";
-import Input from "../../ui/Input";
+import Button from "../../../ui/button/Button";
+import Form from "../../../ui/Form";
+import Input from "../../../ui/Input";
 import FormRowVertical from "../../ui/FormRowVertical";
 
 function LoginForm() {

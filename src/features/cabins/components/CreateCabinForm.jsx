@@ -6,8 +6,8 @@ import Button from "@/ui/button/Button";
 import FileInput from "@/ui/FileInput";
 import Textarea from "@/ui/Textarea";
 import FormRow from "@/ui/FormRow";
-import { useCreateCabin } from "./useCreateCabin";
-import { useEditCabin } from "./useEditCabin";
+import { useCreateCabin } from "../api/useCreateCabin";
+import { useEditCabin } from "../api/useEditCabin";
 
 const REQUIRED_FIELD_MESSAGE = "This field is required.";
 
