@@ -1,7 +1,7 @@
 // import PropTypes from 'prop-types';
 // Header.propTypes = {};
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const StyledHeader = styled.header`
   background-color: var(--color-grey-0);

@@ -1,15 +1,15 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
-import Input from "../../../ui/Input";
-import Form from "../../../ui/Form";
-import Button from "../../../ui/button/Button";
-import FileInput from "../../../ui/FileInput";
-import Textarea from "../../../ui/Textarea";
-import { createEditCabin } from "@/services/apiCabins";
-import FormRow from "@/ui/FormRow";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import Input from '../../../ui/Input';
+import Form from '../../../ui/Form';
+import Button from '../../../ui/button/Button';
+import FileInput from '../../../ui/FileInput';
+import Textarea from '../../../ui/Textarea';
+import { createEditCabin } from '@/services/apiCabins';
+import FormRow from '@/ui/FormRow';
 
-const REQUIRED_FIELD_MESSAGE = "This field is required.";
+const REQUIRED_FIELD_MESSAGE = 'This field is required.';
 
 function CreateCabinForm() {
   const { register, handleSubmit, reset, getValues, formState } = useForm();
@@ -20,8 +20,8 @@ function CreateCabinForm() {
     {
       mutationFn: createEditCabin,
       onSuccess: () => {
-        toast.success("New cabin successfully created!");
-        queryClient.invalidateQueries({ queryKey: ["cabins"] });
+        toast.success('New cabin successfully created!');
+        queryClient.invalidateQueries({ queryKey: ['cabins'] });
         reset();
       },
       onError: (err) => {
@@ -46,11 +46,11 @@ function CreateCabinForm() {
           id="name"
           defaultValue="test"
           disabled={isCreatingCabin}
-          {...register("name", {
+          {...register('name', {
             required: REQUIRED_FIELD_MESSAGE,
             validate: (value) =>
               value.trim().length > 0 ||
-              "Please insert a valid name (no whitespace)",
+              'Please insert a valid name (no whitespace)',
           })}
         />
       </FormRow>
@@ -61,11 +61,11 @@ function CreateCabinForm() {
           id="maxCapacity"
           defaultValue={4}
           disabled={isCreatingCabin}
-          {...register("maxCapacity", {
+          {...register('maxCapacity', {
             required: REQUIRED_FIELD_MESSAGE,
             min: {
               value: 1,
-              message: "Capacity should be at least 1.",
+              message: 'Capacity should be at least 1.',
             },
           })}
         />
@@ -77,11 +77,11 @@ function CreateCabinForm() {
           id="regularPrice"
           defaultValue={500}
           disabled={isCreatingCabin}
-          {...register("regularPrice", {
+          {...register('regularPrice', {
             required: REQUIRED_FIELD_MESSAGE,
             min: {
               value: 1,
-              message: "Price should be at least 1.",
+              message: 'Price should be at least 1.',
             },
           })}
         />
@@ -93,11 +93,11 @@ function CreateCabinForm() {
           id="discount"
           defaultValue={20}
           disabled={isCreatingCabin}
-          {...register("discount", {
+          {...register('discount', {
             required: REQUIRED_FIELD_MESSAGE,
             min: {
               value: 0,
-              message: "Discount should be at least 0.",
+              message: 'Discount should be at least 0.',
             },
             validate: (value) =>
               value <= getValues().regularPrice ||
@@ -115,7 +115,7 @@ function CreateCabinForm() {
           id="description"
           defaultValue="Some description...."
           disabled={isCreatingCabin}
-          {...register("description", {
+          {...register('description', {
             required: REQUIRED_FIELD_MESSAGE,
           })}
         />
@@ -126,7 +126,7 @@ function CreateCabinForm() {
           id="image"
           accept="image/*"
           disabled={isCreatingCabin}
-          {...register("image", {
+          {...register('image', {
             required: REQUIRED_FIELD_MESSAGE,
           })}
         />

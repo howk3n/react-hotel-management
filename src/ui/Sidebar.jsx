@@ -1,7 +1,7 @@
 // import PropTypes from 'prop-types';
-import styled from "styled-components";
-import Logo from "./Logo";
-import MainNav from "./MainNav";
+import styled from 'styled-components';
+import Logo from './Logo';
+import MainNav from './MainNav';
 
 const StyledSidebar = styled.aside`
   background-color: var(--color-grey-0);

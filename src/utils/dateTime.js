@@ -1,4 +1,4 @@
-import { differenceInDays, formatDistance, parseISO } from "date-fns";
+import { differenceInDays, formatDistance, parseISO } from 'date-fns';
 
 /**
  * Some default date formatting
@@ -6,11 +6,11 @@ import { differenceInDays, formatDistance, parseISO } from "date-fns";
  * @returns {Date} Formatted date
  */
 export function formatDate(dateStr) {
-  return new Intl.DateTimeFormat("en", {
-    day: "numeric",
-    month: "short",
-    hour: "2-digit",
-    minute: "2-digit",
+  return new Intl.DateTimeFormat('en', {
+    day: 'numeric',
+    month: 'short',
+    hour: '2-digit',
+    minute: '2-digit',
   }).format(new Date(dateStr));
 }
 
@@ -33,8 +33,8 @@ export const formatDistanceFromNow = (dateStr) =>
   formatDistance(parseISO(dateStr), new Date(), {
     addSuffix: true,
   })
-    .replace("about ", "")
-    .replace("in", "In");
+    .replace('about ', '')
+    .replace('in', 'In');
 
 // Supabase needs an ISO date string. However, that string will be different on every render because the MS or SEC have changed, which isn't good. So we use this trick to remove any time
 export const getToday = function (options = {}) {

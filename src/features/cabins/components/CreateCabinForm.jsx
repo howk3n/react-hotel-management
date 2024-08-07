@@ -1,15 +1,15 @@
-import { useForm } from "react-hook-form";
-import PropTypes from "prop-types";
-import Input from "@/ui/Input";
-import Form from "@/ui/Form";
-import Button from "@/ui/button/Button";
-import FileInput from "@/ui/FileInput";
-import Textarea from "@/ui/Textarea";
-import FormRow from "@/ui/FormRow";
-import { useCreateCabin } from "../api/useCreateCabin";
-import { useEditCabin } from "../api/useEditCabin";
+import { useForm } from 'react-hook-form';
+import PropTypes from 'prop-types';
+import Input from '@/ui/Input';
+import Form from '@/ui/Form';
+import Button from '@/ui/button/Button';
+import FileInput from '@/ui/FileInput';
+import Textarea from '@/ui/Textarea';
+import FormRow from '@/ui/FormRow';
+import { useCreateCabin } from '../api/useCreateCabin';
+import { useEditCabin } from '../api/useEditCabin';
 
-const REQUIRED_FIELD_MESSAGE = "This field is required.";
+const REQUIRED_FIELD_MESSAGE = 'This field is required.';
 
 CreateCabinForm.propTypes = {
   cabinToEdit: PropTypes.object,
@@ -28,7 +28,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
   const { errors } = formState;
 
   function onSubmit(data) {
-    const image = typeof data.image === "string" ? data.image : data.image[0];
+    const image = typeof data.image === 'string' ? data.image : data.image[0];
     if (isEditSession)
       handleEditCabin(
         { newCabinData: { ...data, image }, id: editId },
@@ -57,11 +57,11 @@ function CreateCabinForm({ cabinToEdit = {} }) {
           id="name"
           defaultValue="test"
           disabled={isWorking}
-          {...register("name", {
+          {...register('name', {
             required: REQUIRED_FIELD_MESSAGE,
             validate: (value) =>
               value.trim().length > 0 ||
-              "Please insert a valid name (no whitespace)",
+              'Please insert a valid name (no whitespace)',
           })}
         />
       </FormRow>
@@ -72,11 +72,11 @@ function CreateCabinForm({ cabinToEdit = {} }) {
           id="maxCapacity"
           defaultValue={4}
           disabled={isWorking}
-          {...register("maxCapacity", {
+          {...register('maxCapacity', {
             required: REQUIRED_FIELD_MESSAGE,
             min: {
               value: 1,
-              message: "Capacity should be at least 1.",
+              message: 'Capacity should be at least 1.',
             },
           })}
         />
@@ -88,11 +88,11 @@ function CreateCabinForm({ cabinToEdit = {} }) {
           id="regularPrice"
           defaultValue={500}
           disabled={isWorking}
-          {...register("regularPrice", {
+          {...register('regularPrice', {
             required: REQUIRED_FIELD_MESSAGE,
             min: {
               value: 1,
-              message: "Price should be at least 1.",
+              message: 'Price should be at least 1.',
             },
           })}
         />
@@ -104,11 +104,11 @@ function CreateCabinForm({ cabinToEdit = {} }) {
           id="discount"
           defaultValue={20}
           disabled={isWorking}
-          {...register("discount", {
+          {...register('discount', {
             required: REQUIRED_FIELD_MESSAGE,
             min: {
               value: 0,
-              message: "Discount should be at least 0.",
+              message: 'Discount should be at least 0.',
             },
             validate: (value) =>
               value <= getValues().regularPrice ||
@@ -126,7 +126,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
           id="description"
           defaultValue="Some description...."
           disabled={isWorking}
-          {...register("description", {
+          {...register('description', {
             required: REQUIRED_FIELD_MESSAGE,
           })}
         />
@@ -137,7 +137,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
           id="image"
           accept="image/*"
           disabled={isWorking}
-          {...register("image", {
+          {...register('image', {
             required: isEditSession ? false : REQUIRED_FIELD_MESSAGE,
           })}
         />
@@ -149,7 +149,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
           Cancel
         </Button>
         <Button disabled={isWorking}>
-          {isEditSession ? "Edit cabin" : "Create new cabin"}
+          {isEditSession ? 'Edit cabin' : 'Create new cabin'}
         </Button>
       </FormRow>
     </Form>

@@ -1,13 +1,13 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import Account from "@/pages/Account";
-import Bookings from "@/pages/Bookings";
-import Cabins from "@/pages/Cabins";
-import Dashboard from "@/pages/Dashboard";
-import Login from "@/pages/Login";
-import PageNotFound from "@/pages/PageNotFound";
-import Settings from "@/pages/Settings";
-import Users from "@/pages/Users";
-import AppLayout from "@/ui/AppLayout";
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import Account from '@/pages/Account';
+import Bookings from '@/pages/Bookings';
+import Cabins from '@/pages/Cabins';
+import Dashboard from '@/pages/Dashboard';
+import Login from '@/pages/Login';
+import PageNotFound from '@/pages/PageNotFound';
+import Settings from '@/pages/Settings';
+import Users from '@/pages/Users';
+import AppLayout from '@/ui/AppLayout';
 
 /**
  * Uses react-router-dom.createBrowserRouter() to create routes setup
