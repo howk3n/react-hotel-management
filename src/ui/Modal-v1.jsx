@@ -1,9 +1,7 @@
-import { cloneElement, createContext, useContext, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { HiXMark } from 'react-icons/hi2';
-import { useOutsideClick } from '@/hooks/useOutsideClick';
 
 const StyledModal = styled.div`
   position: fixed;
@@ -54,58 +52,24 @@ const Button = styled.button`
   }
 `;
 
-const ModalContext = createContext();
-
 Modal.propTypes = {
+  onClose: PropTypes.func,
   children: PropTypes.any,
 };
-function Modal({ children }) {
-  const [openName, setOpenName] = useState('');
-
-  const open = setOpenName;
-  const close = () => setOpenName('');
-
-  return (
-    <ModalContext.Provider value={{ openName, close, open }}>
-      {children}
-    </ModalContext.Provider>
-  );
-}
-
-Open.propTypes = {
-  opensWindowName: PropTypes.string,
-  children: PropTypes.any,
-};
-function Open({ opensWindowName, children }) {
-  const { open } = useContext(ModalContext);
-  return cloneElement(children, { onClick: () => open(opensWindowName) });
-}
-
-Window.propTypes = {
-  name: PropTypes.string,
-  children: PropTypes.any,
-};
-function Window({ name, children }) {
-  const { openName, close } = useContext(ModalContext);
-
-  const ref = useOutsideClick(close);
-
-  if (name !== openName) return null;
+function Modal({ onClose, children }) {
   // createPortal => Modal still lives as a child of component that it was initialized from, but is rendered directly in the body in DOM structure
   // This solves most potential CSS problems (specifically overflow: hidden) which can happen with reusability
   return createPortal(
     <Overlay>
-      <StyledModal ref={ref}>
-        <Button onClick={close}>
+      <StyledModal>
+        <Button onClick={onClose}>
           <HiXMark />
         </Button>
-        <div>{cloneElement(children, { onCloseModal: close })}</div>
+        <div>{children}</div>
       </StyledModal>
     </Overlay>,
     document.body
   );
 }
-Modal.Open = Open;
-Modal.Window = Window;
 
-export default Modal;
+// export default Modal;
